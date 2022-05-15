@@ -38,4 +38,16 @@ class DeportmentRepositoryTest {
     void deleteById() {
         deptRepo.deleteById(3L);
     }
+
+    @Test
+    void findByName() {
+        Optional<Department> d = deptRepo.findByDepartmentName("Sales");
+
+        if(d.isPresent()) {
+            log.info(d.get().toString());
+        } else {
+            log.info("can't find Sales department");
+        }
+
+    }
 }

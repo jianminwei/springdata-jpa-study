@@ -28,6 +28,6 @@ public class Department {
     private long id;
 
     @Column(name = "dept_name")
-    private String deptName;
+    private String departmentName;
 
 }
