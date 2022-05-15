@@ -50,4 +50,12 @@ class DeportmentRepositoryTest {
         }
 
     }
+
+    @Test
+    void saveDept() {
+        Department d = new Department();
+
+        d.setDepartmentName("Research");
+        deptRepo.save(d);
+    }
 }
