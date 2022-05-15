@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -13,16 +14,16 @@ import java.sql.Date;
 @Table(name = "department")
 public class Department {
 
-
     /**
-     * @GeneratedValue(strategy = GenerationType.IDENTITY)
-     * In this configuration, Hibernate will use database AUTO_INCREMENT for the id column.
-     * This configuration is fully controlled by the database.
-     * It is a better approach then the @GeneratedValue(strategy = GenerationType.AUTO)
+     * @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dept_seq_generator")
+     * In this configuration, Hibernate will create a sequence based on the same specified. And use
+     * the sequence for the Entity ID.
+     * In practical, this is the best approach for controlling the IDs.
      */
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dept_seq_generator")
+    @GenericGenerator(name = "dept_seq_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator")
     @Column(name = "dept_id")
     private long id;
 
