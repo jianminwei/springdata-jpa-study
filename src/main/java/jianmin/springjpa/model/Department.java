@@ -15,16 +15,14 @@ public class Department {
 
 
     /**
-     * When using @GeneratedValue, it's equivalent to @GeneratedValue(strategy = GenerationType.AUTO)
-     * The default value for @GeneratedValue is strategy = GenerationType.AUTO.
-     *
-     * In this configuration, Hibernate will generate a "hibernate_sequence" table. All entities will be
-     * using the same sequence table. So you can imagine that each table will have scattered IDs.
-     * In practical applications, this is not desirable.
+     * @GeneratedValue(strategy = GenerationType.IDENTITY)
+     * In this configuration, Hibernate will use database AUTO_INCREMENT for the id column.
+     * This configuration is fully controlled by the database.
+     * It is a better approach then the @GeneratedValue(strategy = GenerationType.AUTO)
      */
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dept_id")
     private long id;
 
