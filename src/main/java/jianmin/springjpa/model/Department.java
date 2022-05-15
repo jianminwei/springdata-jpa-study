@@ -14,16 +14,8 @@ import java.sql.Date;
 @Table(name = "department")
 public class Department {
 
-    /**
-     * @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dept_seq_generator")
-     * In this configuration, Hibernate will create a sequence based on the same specified. And use
-     * the sequence for the Entity ID.
-     * In practical, this is the best approach for controlling the IDs.
-     */
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dept_seq_generator")
-    @GenericGenerator(name = "dept_seq_generator", strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dept_id")
     private long id;
 

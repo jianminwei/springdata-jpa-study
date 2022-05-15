@@ -36,7 +36,7 @@ class DeportmentRepositoryTest {
 
     @Test
     void deleteById() {
-        deptRepo.deleteById(3L);
+        deptRepo.deleteById(2L);
     }
 
     @Test
