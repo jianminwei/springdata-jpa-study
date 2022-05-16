@@ -33,4 +33,9 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "dept_id")
     private Department department;
+
+    @Transient
+    public String fullName() {
+        return firstName + ", " + lastName;
+    }
 }

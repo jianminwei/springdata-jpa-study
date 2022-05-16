@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,6 +37,13 @@ class EmployeeRepositoryTest {
         }else {
             log.info("Can't find department 2L");
         }
+    }
+
+    @Test
+    void findEmployeeDept() {
+        List<Employee> employees = empRepo.findAll();
+
+        employees.stream().forEach(e -> {log.info(e.fullName() + ", " + e.getDepartment().toString());});
     }
 
 }
