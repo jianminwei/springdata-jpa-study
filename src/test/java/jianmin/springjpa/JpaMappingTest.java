@@ -34,22 +34,20 @@ class JpaMappingTest {
 
     @Test
     void findDeptById() {
-        Optional<Department> d = deptRepo.findById(2L);
-
-        if(d.isPresent()) {
-            log.info(d.get().toString());
-        }
+        Department d = deptRepo.findById(2L).orElseThrow();
+        log.info("Department: " + d.getId() + ", " + d.getDepartmentName());
     }
 
     @Test
     void deleteDeptById() {
-        deptRepo.deleteById(2L);
+        //can't delete a department due to referential integrity.
+        //deptRepo.deleteById(2L);
     }
 
     @Test
     void findDeptByName() {
         Department d = deptRepo.findByDepartmentName("Sales").orElseThrow();
-        log.info(d.toString());
+        log.info("Department: " + d.getId() + ", " + d.getDepartmentName());
     }
 
     @Test
@@ -63,23 +61,23 @@ class JpaMappingTest {
 
     @Test
     void saveEmployee() {
-        Department d = deptRepo.findById(3L).orElseThrow();
-
+        Department d = deptRepo.findByDepartmentName("Sales").orElseThrow();
         Employee e = new Employee();
         e.setFirstName("Joe");
         e.setLastName("Shimel");
-        e.setEmail("joe.shemel@gmail.com");
-        e.setDepartment(d);
+        e.setEmail("joe.shimel@gmail.com");
 
+        d.getEmployees().add(e);
+
+        /**
+         * Note: In order to make below save Employee working, two things you have to do:
+         * 1. The deptRepo.findByDepartmentName() have to add the EntityGraph annotation.
+         * 2. You have to save the employee with empRepo. You can't save the employee with the
+         *    department d.
+         */
         Employee savedEmp = empRepo.save(e);
-        log.info("Saved employee: " + savedEmp.toString());
 
+        log.info("Employee saved: " + e.getId() + ", " + e.getFirstName() + "," + e.getLastName());
     }
 
-    @Test
-    void findEmployeeDept() {
-        List<Employee> employees = empRepo.findAll();
-
-        employees.stream().forEach(e -> {log.info(e.fullName() + ", " + e.getDepartment().toString());});
-    }
 }
