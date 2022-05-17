@@ -17,7 +17,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
      * @return List<Employee>
      */
     @Override
-    @EntityGraph(attributePaths = "department")
+    //@EntityGraph(attributePaths = "department")
     List<Employee> findAll();
 
 }

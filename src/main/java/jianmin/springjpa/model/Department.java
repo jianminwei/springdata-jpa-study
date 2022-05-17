@@ -8,6 +8,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -21,5 +23,14 @@ public class Department {
 
     @Column(name = "dept_name")
     private String departmentName;
+
+    /**
+     * Note: you have to specify @JoinColumn on the employee table, otherwise Hibernate
+     * creates an association table in the middle. But for One to Many relationship, you never
+     * do that.
+     */
+    @OneToMany
+    @JoinColumn(name = "dept_id")
+    private List<Employee> employees = new ArrayList<>();
 
 }

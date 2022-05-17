@@ -21,29 +21,4 @@ class EmployeeRepositoryTest {
     @Autowired
     DeportmentRepository deptRepo;
 
-    @Test
-    void saveEmployee() {
-        Optional<Department> d = deptRepo.findById(2L);
-
-        if(d.isPresent()) {
-            Employee e = new Employee();
-            e.setFirstName("Joe");
-            e.setLastName("Shimel");
-            e.setEmail("joe.shemel@gmail.com");
-            e.setDepartment(d.get());
-
-            Employee savedEmp = empRepo.save(e);
-            log.info("Saved employee: " + savedEmp.toString());
-        }else {
-            log.info("Can't find department 2L");
-        }
-    }
-
-    @Test
-    void findEmployeeDept() {
-        List<Employee> employees = empRepo.findAll();
-
-        employees.stream().forEach(e -> {log.info(e.fullName() + ", " + e.getDepartment().toString());});
-    }
-
 }

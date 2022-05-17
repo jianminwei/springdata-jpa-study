@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.jpa.repository.EntityGraph;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,34 +23,22 @@ class DeportmentRepositoryTest {
         List<Department> depts = deptRepo.findAll();
 
         //depts.stream().forEach(System.out::println);
-        depts.stream().forEach(d -> {log.info(d.toString());});
+        //depts.stream().forEach(d -> {log.info(d.toString());});
+        depts.stream().forEach(d -> {log.info(d.getId() + ", " + d.getDepartmentName());});
     }
 
     @Test
     void findById() {
-        Optional<Department> d = deptRepo.findById(2L);
+         Department d = deptRepo.findById(6L).orElseThrow();
 
-        if(d.isPresent()) {
-            log.info(d.get().toString());
-        }
-    }
+         log.info(d.toString());
+     }
 
     @Test
     void deleteById() {
         deptRepo.deleteById(2L);
     }
 
-    @Test
-    void findByName() {
-        Optional<Department> d = deptRepo.findByDepartmentName("Sales");
-
-        if(d.isPresent()) {
-            log.info(d.get().toString());
-        } else {
-            log.info("can't find Sales department");
-        }
-
-    }
 
     @Test
     void saveDept() {
