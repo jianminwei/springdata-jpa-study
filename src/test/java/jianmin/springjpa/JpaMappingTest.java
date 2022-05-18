@@ -67,8 +67,13 @@ class JpaMappingTest {
         e.setLastName("Shimel");
         e.setEmail("joe.shimel@gmail.com");
 
-        e.setDepartment(d);
-        d.getEmployees().add(e);
+        //e.setDepartment(d);
+        //d.getEmployees().add(e);
+
+        /**
+         * Use the utility method from the Department entity.
+         */
+        d.addEmployee(e);
 
         /**
          * Note: In order to make below save Employee working, two things you have to do:

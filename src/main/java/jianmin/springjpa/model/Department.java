@@ -30,4 +30,19 @@ public class Department {
      */
     @OneToMany(mappedBy = "department")
     private List<Employee> employees;
+
+
+    /**
+     * This is a utility method for adding an employee in the bi-directional ManyToOne
+     * situation.
+     *
+     * @param employee
+     * @return Employee
+     */
+    public Employee addEmployee(Employee employee) {
+        this.employees.add(employee);
+        employee.setDepartment(this);
+
+        return employee;
+    }
 }
