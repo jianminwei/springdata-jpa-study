@@ -22,6 +22,8 @@ public class Employee {
 
     private String email;
 
+    private int dept_id;
+
     @Transient
     public String fullName() {
         return firstName + ", " + lastName;

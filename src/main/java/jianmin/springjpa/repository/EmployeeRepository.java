@@ -3,21 +3,19 @@ package jianmin.springjpa.repository;
 import jianmin.springjpa.model.Employee;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-    /**
-     * By default, Hibernate use "LAZY" fetching for the ManyToOne Employee to Deportment
-     * relationship. That means each time when you get Department data from Employee object,
-     * you will incur a SQL query.
-     * To avoid that, you can tell Hibernate to do a join with Department using @EntityGraph
-     *
-     * @return List<Employee>
-     */
     @Override
-    @EntityGraph(attributePaths = "department")
+    /**
+     * Note: Even you can do a Query to SELECT both Employee and Department,
+     * you still can't reference them in the Employee entity because JPA has
+     * nowhere to put the Department data in the Employee entity.
+     */
+    @Query("SELECT e, d FROM Employee e , Department d WHERE e.dept_id = d.id")
     List<Employee> findAll();
 
 }

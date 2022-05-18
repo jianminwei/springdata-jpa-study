@@ -80,4 +80,11 @@ class JpaMappingTest {
         log.info("Employee saved: " + e.getId() + ", " + e.getFirstName() + "," + e.getLastName());
     }
 
+    @Test
+    void findAllEmployees() {
+        List<Employee> employees = empRepo.findAll();
+
+        employees.stream().forEach(e -> {log.info("employee: " + e.toString()  ) ; });
+    }
+
 }
