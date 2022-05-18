@@ -21,6 +21,4 @@ public interface DeportmentRepository extends JpaRepository<Department, Long> {
     @EntityGraph(attributePaths = "employees")
     List<Department> findAll() ;
 
-//    @EntityGraph(attributePaths = "employees")
-//    Department save(Department d);
 }

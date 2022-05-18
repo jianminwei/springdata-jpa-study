@@ -22,7 +22,9 @@ public class Employee {
 
     private String email;
 
-    private int dept_id;
+    @ManyToOne
+    @JoinColumn(name = "dept_id")
+    private Department department;
 
     @Transient
     public String fullName() {

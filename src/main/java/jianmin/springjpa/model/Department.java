@@ -24,12 +24,10 @@ public class Department {
     private String departmentName;
 
     /**
-     * Create a OneToMany relation to Employee and specify "dept_id" is the join column.
-     * From database implementation, there is no difference from ManyToOne relation from
-     * the employee side. It's just that within java code, you navigate from Department to
-     * employees.
+     * Create a bi-direction ManyToOne association. Normally the Many side own the relationship,
+     * and the One side just reference it using @OneToMany(mappedBy = "department"). In this case,
+     * "department" is the private property in the Employee entity.
      */
-    @OneToMany
-    @JoinColumn(name = "dept_id")
+    @OneToMany(mappedBy = "department")
     private List<Employee> employees;
 }

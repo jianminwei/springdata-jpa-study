@@ -67,6 +67,7 @@ class JpaMappingTest {
         e.setLastName("Shimel");
         e.setEmail("joe.shimel@gmail.com");
 
+        e.setDepartment(d);
         d.getEmployees().add(e);
 
         /**
@@ -77,7 +78,7 @@ class JpaMappingTest {
          */
         Employee savedEmp = empRepo.save(e);
 
-        log.info("Employee saved: " + e.getId() + ", " + e.getFirstName() + "," + e.getLastName());
+        log.info("Employee saved: " + e.getId() + ", " + e.getFirstName() + "," + e.getLastName() + ", dept_id:" + e.getDepartment().getId());
     }
 
     @Test
